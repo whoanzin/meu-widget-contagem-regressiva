@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contador de Contagem Regressiva</title>
+    <title>Contador de Contagem Regressiva Editável</title>
     <style>
         body {
             display: flex;
@@ -17,13 +17,25 @@
             font-size: 2em;
             margin: 20px;
         }
+        .title {
+            font-size: 24px;
+            color: #333;
+        }
     </style>
 </head>
 <body>
+    <div class="title" id="title"></div>
     <div class="countdown" id="countdown"></div>
     <script>
+        const params = new URLSearchParams(window.location.search);
+        const endDate = params.get('date'); // Formato esperado: 'YYYY-MM-DDTHH:MM:SS'
+        const title = params.get('title');
+
         const countdownElement = document.getElementById('countdown');
-        const targetDate = new Date('2024-12-31T23:59:59').getTime();
+        const titleElement = document.getElementById('title');
+        titleElement.textContent = title ? title : 'Contagem Regressiva';
+
+        const targetDate = new Date(endDate).getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
